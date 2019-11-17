@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
-process.title = "choolo";
+process.title = "zoohack";
 process.on("SIGINT", function () {
     process.exit();
 });
@@ -10,7 +10,6 @@ const http = require("http");
 const app = require("express")();
 const config = require("./configs");
 let database = require("./services/database");
-const connection = require("./services/connection");
 const webexpress = require("./services/webexpress");
 
 database
@@ -21,7 +20,6 @@ database
 function listen() {
     let server = http.createServer(app);
     webexpress.init(app);
-    connection.init(server);
     server.listen(config.web_port, () => {
         console.log("Listening on port " + config.web_port);
     });

@@ -9,3 +9,10 @@ router.get("/", async function (req, res, next) {
         error: false
     });
 });
+
+router.post("/answer/new", async function (req, res, next) {
+    console.log(req.body);
+    res.status(200).send({
+        error: false
+    });
+});
