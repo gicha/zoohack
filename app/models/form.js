@@ -3,11 +3,11 @@
 const Mongoose = require("mongoose");
 const Schema = Mongoose.Schema;
 
-const QuestionSchema = new Schema(
+const FormSchema = new Schema(
     {
-        title: String,
-        answers: String,
-        value: Number,
+        company: String,
+        answers: {type: Schema.Types.ObjectId, ref: "Answer"},
+        summary: String,
     },
     {
         toObject: {
@@ -19,9 +19,9 @@ const QuestionSchema = new Schema(
     }
 );
 
-QuestionSchema.methods = {};
+FormSchema.methods = {};
 
-QuestionSchema.statics = {
+FormSchema.statics = {
     getById: function (id) {
         if (id instanceof String) id = Mongoose.Types.ObjectId(id.toString());
         return this.findOne({_id: id}).exec();
@@ -31,4 +31,4 @@ QuestionSchema.statics = {
     }
 };
 
-Mongoose.model("Question", QuestionSchema);
+Mongoose.model("Form", FormSchema);

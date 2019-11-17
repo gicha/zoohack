@@ -5,8 +5,9 @@ const Schema = Mongoose.Schema;
 
 const AnswerSchema = new Schema(
     {
-        mail: String,
-        company: String
+        order: String,
+        question: {type: Schema.Types.ObjectId, ref: "Question"},
+        result: String,
     },
     {
         toObject: {
