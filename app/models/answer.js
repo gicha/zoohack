@@ -5,9 +5,10 @@ const Schema = Mongoose.Schema;
 
 const AnswerSchema = new Schema(
     {
-        order: String,
-        question: {type: Schema.Types.ObjectId, ref: "Question"},
-        result: String,
+        isGroup: Boolean,
+        question: String,
+        answer: String,
+        point: String,
     },
     {
         toObject: {
@@ -27,7 +28,7 @@ AnswerSchema.statics = {
         return this.findOne({_id: id}).exec();
     },
     getAll: function () {
-        return this.findOne().exec();
+        return this.find().exec();
     }
 };
 

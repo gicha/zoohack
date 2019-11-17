@@ -17,5 +17,15 @@ module.exports = {
     },
     without: (arr, ...args) => {
         return arr.filter(v => !args.includes(v));
-    }
+    },
+    transform: (object) => {
+        if (object === null)
+            return null;
+        if (Array.isArray(object)) {
+            for (let index in object) {
+                object[index] = object[index].toObject();
+            }
+        }
+        return object;
+    },
 };

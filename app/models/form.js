@@ -6,8 +6,8 @@ const Schema = Mongoose.Schema;
 const FormSchema = new Schema(
     {
         company: String,
-        answers: {type: Schema.Types.ObjectId, ref: "Answer"},
-        summary: String,
+        answers: [{type: Schema.Types.ObjectId, ref: "Answer"}],
+        summary: Number,
     },
     {
         toObject: {
@@ -27,7 +27,7 @@ FormSchema.statics = {
         return this.findOne({_id: id}).exec();
     },
     getAll: function () {
-        return this.findOne().exec();
+        return this.find().populate('answers').exec();
     }
 };
 

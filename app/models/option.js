@@ -3,11 +3,10 @@
 const Mongoose = require("mongoose");
 const Schema = Mongoose.Schema;
 
-const QuestionSchema = new Schema(
+const OptionSchema = new Schema(
     {
         title: String,
-        answers: String,
-        value: Number,
+        point: Number,
     },
     {
         toObject: {
@@ -19,16 +18,19 @@ const QuestionSchema = new Schema(
     }
 );
 
-QuestionSchema.methods = {};
+OptionSchema.methods = {};
 
-QuestionSchema.statics = {
+OptionSchema.statics = {
     getById: function (id) {
         if (id instanceof String) id = Mongoose.Types.ObjectId(id.toString());
         return this.findOne({_id: id}).exec();
     },
     getAll: function () {
-        return this.findOne().exec();
+        return this.find().exec();
+    },
+    getPoint: async function (title) {
+        return (await this.findOne({title: title}).exec()).point;
     }
 };
 
-Mongoose.model("Question", QuestionSchema);
+Mongoose.model("Option", OptionSchema);
